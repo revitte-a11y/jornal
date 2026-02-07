@@ -2,6 +2,7 @@
 const noticias = [
     {
         id: 0, // <--- ADICIONE O ID AQUI
+        edicao: "fev_2026_1", // <--- Faltava isso aqui no seu script.js!
         titulo: "Bem-vindos ao Voz do Estudante!",
         resumo: "O nosso novo jornal digital escolar acaba de entrar no ar. Um espaço feito por alunos e para alunos.",
         imagem: "img/foto.webp",
@@ -11,6 +12,7 @@ const noticias = [
 
     {
         id: 2, // <--- ADICIONE O ID AQUI
+        edicao: "fev_2026_1", // <--- Faltava isso aqui no seu script.js!
         titulo: "Entrevista com a Merendeira",
         resumo: "Dona Maria conta o segredo do sucesso do seu famoso bolo de cenoura.",
         imagem: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400",
@@ -19,6 +21,7 @@ const noticias = [
     },
     {
         id: 3, // <--- ADICIONE O ID AQUI
+        edicao: "fev_2026_1", // <--- Faltava isso aqui no seu script.js!
         titulo: "Sujismundo!!!!",
         resumo: "Aluno sobe na carteira e coloca o pé sujo na parede da classe!",
         imagem: "img/fofoca_webp.webp",
@@ -28,21 +31,37 @@ const noticias = [
 ];
 
 // 2. FUNÇÃO PARA CARREGAR NOTÍCIAS
-function carregarNoticias(filtro = 'todos') {
+const seletorEdicao = document.getElementById('selectEdicao');
+
+function carregarNoticias() {
     const container = document.getElementById('noticias-container');
+    const seletorEdicao = document.getElementById('selectEdicao');
+    
+    // Pega o valor atual do dropdown
+    const edicaoAtual = seletorEdicao.value;
+    
+    // Pega a categoria do botão que estiver com a classe 'active'
+    const botaoAtivo = document.querySelector('.filter-btn.active');
+    const filtroCategoria = botaoAtivo ? botaoAtivo.getAttribute('data-filter') : 'todos';
+    
     container.innerHTML = '';
 
+
     noticias.forEach(item => {
-        if (filtro === 'todos' || item.categoria === filtro) {
+        // Regra: Deve ser da edição selecionada E (ser da categoria certa OU filtro 'todos')
+        const pertenceAEdicao = item.edicao === edicaoAtual;
+        const pertenceACategoria = (filtroCategoria === 'todos' || item.categoria === filtroCategoria);
+
+        if (pertenceAEdicao && pertenceACategoria) {
             const card = `
                 <div class="col-md-4 mb-4">
-                    <div class="card h-100 news-card shadow-sm border-0">
+                    <div class="card h-100 shadow-sm border-0">
                         <img src="${item.imagem}" class="card-img-top" alt="${item.titulo}">
                         <div class="card-body">
                             <span class="badge bg-primary mb-2">${item.categoria}</span>
                             <h5 class="card-title">${item.titulo}</h5>
                             <p class="card-text text-muted">${item.resumo}</p>
-                            <a href="noticia.html?id=${item.id}" class="btn btn-outline-dark btn-sm">Ler mais</a>   
+                            <a href="noticia.html?id=${item.id}" class="btn btn-outline-dark btn-sm">Ler mais</a>
                         </div>
                     </div>
                 </div>
@@ -50,7 +69,25 @@ function carregarNoticias(filtro = 'todos') {
             container.innerHTML += card;
         }
     });
+
+    // Se não houver notícias para essa combinação, avisa o usuário
+    if (container.innerHTML === '') {
+        container.innerHTML = '<p class="text-center text-muted">Nenhuma notícia encontrada para esta edição nesta categoria.</p>';
+    }
 }
+
+// Escuta quando o usuário muda a edição no Dropdown
+seletorEdicao.addEventListener('change', carregarNoticias);
+
+// Atualize também o clique nos botões de filtro para chamar a função sem parâmetros
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'btn-primary'));
+        this.classList.add('active', 'btn-primary');
+        carregarNoticias(); // Chama a função que já olha para o Dropdown e o Botão
+    });
+});
+
 
 // 3. LÓGICA DE FILTROS
 document.querySelectorAll('.filter-btn').forEach(btn => {
@@ -93,10 +130,22 @@ form.addEventListener('submit', async (e) => {
 });
 
 // INICIALIZAÇÃO
+// ... (mantenha suas funções carregarNoticias e eventos acima)
+
 window.onload = () => {
+    // 1. Automatismo: Define o dropdown para a primeira opção (a mais recente)
+    const seletor = document.getElementById('selectEdicao');
+    if (seletor.options.length > 0) {
+        seletor.selectedIndex = 0; // Garante que a primeira edição da lista seja a ativa
+    }
+
+    // 2. Chama a função para renderizar as notícias pela primeira vez
     carregarNoticias();
+
+    // 3. Aplica o modo escuro se estiver salvo
     if(localStorage.getItem('tema') === 'dark') {
-        toggle.checked = true;
+        const toggle = document.getElementById('darkModeToggle');
+        if (toggle) toggle.checked = true;
         document.documentElement.setAttribute('data-bs-theme', 'dark');
     }
 };
