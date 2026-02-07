@@ -12,6 +12,15 @@ const noticias = [
         imagem: "img/volei_webp.webp",
         categoria: "Esportes"
     },
+
+    {
+        titulo: "Sujismundo!!!!",
+        resumo: "Aluno sobe na carteira e coloca o pé sujo na parede da classe!",
+        imagem: "img/fofoca_webp.webp",
+        categoria: "Fofocas"
+    },
+
+
     {
         titulo: "Entrevista com a Merendeira",
         resumo: "Dona Maria conta o segredo do sucesso do seu famoso bolo de cenoura.",
