@@ -3,7 +3,7 @@ const noticias = [
     {
         titulo: "Bem-vindos ao Voz do Estudante!",
         resumo: "O nosso novo jornal digital escolar acaba de entrar no ar. Um espaço feito por alunos e para alunos.",
-        imagem: "https://images.unsplash.com/photo-1504711432869-efd597cdd04d?w=800",
+        imagem: "img/foto.webp",
         categoria: "Avisos"
     },
     {
