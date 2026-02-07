@@ -5,6 +5,14 @@ const noticias = [
         imagem: "https://via.placeholder.com/400x200",
         categoria: "Esportes"
     },
+
+{
+    titulo: "Bem-vindos ao Voz do Estudante!",
+    resumo: "O nosso novo jornal digital escolar acaba de entrar no ar. Um espaço feito por alunos e para alunos. Confira nossa proposta!",
+    imagem: "https://images.unsplash.com/photo-1504711432869-efd597cdd04d?w=800", // Imagem de jornalismo/comunicação
+    categoria: "Avisos"
+},
+    
     {
         titulo: "Reforma na Biblioteca",
         resumo: "O espaço agora conta com novos computadores e áreas de estudo em grupo.",
@@ -83,4 +91,5 @@ window.onload = () => {
         toggle.checked = true;
         htmlElement.setAttribute('data-bs-theme', 'dark');
     }
+
 };
