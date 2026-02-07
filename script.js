@@ -1,34 +1,37 @@
 // 1. BANCO DE DADOS DE NOTÍCIAS
 const noticias = [
     {
+        id: 0, // <--- ADICIONE O ID AQUI
         titulo: "Bem-vindos ao Voz do Estudante!",
         resumo: "O nosso novo jornal digital escolar acaba de entrar no ar. Um espaço feito por alunos e para alunos.",
         imagem: "img/foto.webp",
-        categoria: "Avisos"
+        categoria: "Avisos",
+        conteudo: "Este é o texto completo da nossa primeira matéria! Estamos muito felizes em lançar este portal para a escola." // <--- ADICIONE O CONTEÚDO
     },
     {
+        id: 1, // <--- ADICIONE O ID AQUI
         titulo: "Interclasse de Vôlei",
         resumo: "As finais acontecem nesta sexta-feira no ginásio principal. Venha torcer pela sua sala!",
         imagem: "img/volei_webp.webp",
-        categoria: "Esportes"
+        categoria: "Esportes",
+        conteudo: "A final do interclasse promete parar a escola! Os times do 9º ano A e do 1º ano Médio se enfrentam às 10h no ginásio principal. Não perca a chance de apoiar sua turma!"
     },
-
-
-
     {
+        id: 2, // <--- ADICIONE O ID AQUI
         titulo: "Entrevista com a Merendeira",
         resumo: "Dona Maria conta o segredo do sucesso do seu famoso bolo de cenoura.",
         imagem: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400",
-        categoria: "Entrevistas"
+        categoria: "Entrevistas",
+        conteudo: "Dona Maria nos revelou que o segredo não está na massa, mas no amor que ela coloca em cada fornada. Ela trabalha na nossa escola há 15 anos e diz que ver o sorriso dos alunos é sua maior recompensa."
     },
-
     {
+        id: 3, // <--- ADICIONE O ID AQUI
         titulo: "Sujismundo!!!!",
         resumo: "Aluno sobe na carteira e coloca o pé sujo na parede da classe!",
         imagem: "img/fofoca_webp.webp",
-        categoria: "Fofocas"
+        categoria: "Fofocas",
+        conteudo: "Flagrante na sala do 2º ano! Um aluno (que não quis se identificar) foi visto subindo na mesa para alcançar o ventilador e acabou deixando uma marca de pegada na parede branca. Vamos cuidar do nosso patrimônio, galera!"
     }
-
 ];
 
 // 2. FUNÇÃO PARA CARREGAR NOTÍCIAS
@@ -46,7 +49,7 @@ function carregarNoticias(filtro = 'todos') {
                             <span class="badge bg-primary mb-2">${item.categoria}</span>
                             <h5 class="card-title">${item.titulo}</h5>
                             <p class="card-text text-muted">${item.resumo}</p>
-                            <a href="#" class="btn btn-outline-dark btn-sm">Ler mais</a>
+                            <a href="noticia.html?id=${item.id}" class="btn btn-outline-dark btn-sm">Ler mais</a>   
                         </div>
                     </div>
                 </div>
