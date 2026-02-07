@@ -1,49 +1,41 @@
+// 1. BANCO DE DADOS DE NOTÍCIAS
 const noticias = [
     {
-        titulo: "Novos Clubes de Xadrez",
-        resumo: "As inscrições para o campeonato intercolegial começam na próxima segunda-feira.",
-        imagem: "https://via.placeholder.com/400x200",
-        categoria: "Esportes"
-    },
-
-{
-    titulo: "Bem-vindos ao Voz do Estudante!",
-    resumo: "O nosso novo jornal digital escolar acaba de entrar no ar. Um espaço feito por alunos e para alunos. Confira nossa proposta!",
-    imagem: "https://images.unsplash.com/photo-1504711432869-efd597cdd04d?w=800", // Imagem de jornalismo/comunicação
-    categoria: "Avisos"
-},
-
-    {
-        titulo: "Reforma na Biblioteca",
-        resumo: "O espaço agora conta com novos computadores e áreas de estudo em grupo.",
-        imagem: "https://via.placeholder.com/400x200",
+        titulo: "Bem-vindos ao Voz do Estudante!",
+        resumo: "O nosso novo jornal digital escolar acaba de entrar no ar. Um espaço feito por alunos e para alunos.",
+        imagem: "https://images.unsplash.com/photo-1504711432869-efd597cdd04d?w=800",
         categoria: "Avisos"
     },
     {
-        titulo: "Entrevista com a Diretora",
-        resumo: "Confira os planos para o novo laboratório de tecnologia da escola.",
-        imagem: "https://via.placeholder.com/400x200",
+        titulo: "Interclasse de Vôlei",
+        resumo: "As finais acontecem nesta sexta-feira no ginásio principal. Venha torcer pela sua sala!",
+        imagem: "https://images.unsplash.com/photo-1547347298-407458488a82?w=400",
+        categoria: "Esportes"
+    },
+    {
+        titulo: "Entrevista com a Merendeira",
+        resumo: "Dona Maria conta o segredo do sucesso do seu famoso bolo de cenoura.",
+        imagem: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400",
         categoria: "Entrevistas"
     }
 ];
 
-// ... (mantenha sua lista de noticias aqui)
-
-function carregarNoticias(categoriaFiltro = 'todos') {
+// 2. FUNÇÃO PARA CARREGAR NOTÍCIAS
+function carregarNoticias(filtro = 'todos') {
     const container = document.getElementById('noticias-container');
-    container.innerHTML = ''; // Limpa antes de carregar
+    container.innerHTML = '';
 
     noticias.forEach(item => {
-        // Lógica de filtro: se for 'todos' ou a categoria bater
-        if (categoriaFiltro === 'todos' || item.categoria === categoriaFiltro) {
+        if (filtro === 'todos' || item.categoria === filtro) {
             const card = `
-                <div class="col-md-4 mb-4 news-item">
-                    <div class="card h-100 shadow-sm">
-                        <img src="${item.imagem}" class="card-img-top">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 news-card shadow-sm border-0">
+                        <img src="${item.imagem}" class="card-img-top" alt="${item.titulo}">
                         <div class="card-body">
-                            <span class="badge bg-info text-dark mb-2">${item.categoria}</span>
+                            <span class="badge bg-primary mb-2">${item.categoria}</span>
                             <h5 class="card-title">${item.titulo}</h5>
-                            <p class="card-text">${item.resumo}</p>
+                            <p class="card-text text-muted">${item.resumo}</p>
+                            <a href="#" class="btn btn-outline-dark btn-sm">Ler mais</a>
                         </div>
                     </div>
                 </div>
@@ -53,68 +45,51 @@ function carregarNoticias(categoriaFiltro = 'todos') {
     });
 }
 
-// Configuração dos botões de filtro
-document.querySelectorAll('.filter-btn').forEach(botao => {
-    botao.addEventListener('click', function() {
-        // Remove 'active' de todos e adiciona no clicado
-        document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active', 'btn-primary'));
+// 3. LÓGICA DE FILTROS
+document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active', 'btn-primary'));
         this.classList.add('active', 'btn-primary');
-        
-        const filtro = this.getAttribute('data-filter');
-        carregarNoticias(filtro);
+        carregarNoticias(this.getAttribute('data-filter'));
     });
 });
 
-// Inicialização
-document.addEventListener('DOMContentLoaded', () => carregarNoticias());
-
+// 4. MODO ESCURO
 const toggle = document.getElementById('darkModeToggle');
-const htmlElement = document.documentElement;
-
 toggle.addEventListener('change', () => {
-    if (toggle.checked) {
-        htmlElement.setAttribute('data-bs-theme', 'dark');
-        document.getElementById('themeLabel').innerText = "Modo Claro";
-        // Opcional: Salva a preferência do aluno no navegador
-        localStorage.setItem('tema', 'dark');
-    } else {
-        htmlElement.setAttribute('data-bs-theme', 'light');
-        document.getElementById('themeLabel').innerText = "Modo Escuro";
-        localStorage.setItem('tema', 'light');
-    }
+    const theme = toggle.checked ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-bs-theme', theme);
+    document.getElementById('themeLabel').innerText = toggle.checked ? "Modo Claro" : "Modo Escuro";
+    localStorage.setItem('tema', theme);
 });
 
-// Verifica se o aluno já usou o site antes e preferiu o modo escuro
-window.onload = () => {
-    const temaSalvo = localStorage.getItem('tema');
-    if (temaSalvo === 'dark') {
-        toggle.checked = true;
-        htmlElement.setAttribute('data-bs-theme', 'dark');
-    }
-};
-
+// 5. ENVIO DO FORMULÁRIO (AJAX)
 const form = document.getElementById('formSugestao');
-
-form.addEventListener('submit', async function(event) {
-    event.preventDefault(); // Impede o redirecionamento da página
-
-    const data = new FormData(event.target);
+form.addEventListener('submit', async (e) => {
+    e.preventDefault();
     const feedback = document.getElementById('mensagemSucesso');
+    const data = new FormData(e.target);
 
-    // Envia os dados para o Formspree
-    const response = await fetch(event.target.action, {
+    const response = await fetch(e.target.action, {
         method: 'POST',
         body: data,
-        headers: {
-            'Accept': 'application/json'
-        }
+        headers: { 'Accept': 'application/json' }
     });
 
     if (response.ok) {
-        form.reset(); // Limpa os campos
-        form.classList.add('d-none'); // Esconde o formulário
-        feedback.classList.remove('d-none'); // Mostra a mensagem de sucesso
+        form.reset();
+        form.classList.add('d-none');
+        feedback.classList.remove('d-none');
     } else {
-        alert("Ops! Houve um erro ao enviar. Tente novamente mais tarde.");
+        alert("Erro ao enviar. Tente novamente.");
     }
 });
+
+// INICIALIZAÇÃO
+window.onload = () => {
+    carregarNoticias();
+    if(localStorage.getItem('tema') === 'dark') {
+        toggle.checked = true;
+        document.documentElement.setAttribute('data-bs-theme', 'dark');
+    }
+};
