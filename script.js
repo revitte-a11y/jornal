@@ -13,12 +13,6 @@ const noticias = [
         categoria: "Esportes"
     },
 
-    {
-        titulo: "Sujismundo!!!!",
-        resumo: "Aluno sobe na carteira e coloca o pé sujo na parede da classe!",
-        imagem: "img/fofoca_webp.webp",
-        categoria: "Fofocas"
-    },
 
 
     {
@@ -26,7 +20,15 @@ const noticias = [
         resumo: "Dona Maria conta o segredo do sucesso do seu famoso bolo de cenoura.",
         imagem: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400",
         categoria: "Entrevistas"
+    },
+
+    {
+        titulo: "Sujismundo!!!!",
+        resumo: "Aluno sobe na carteira e coloca o pé sujo na parede da classe!",
+        imagem: "img/fofoca_webp.webp",
+        categoria: "Fofocas"
     }
+
 ];
 
 // 2. FUNÇÃO PARA CARREGAR NOTÍCIAS
