@@ -7,14 +7,7 @@ const noticias = [
         categoria: "Avisos",
         conteudo: "Aqui você escreve todo o texto da matéria... pode ser bem longo!"
     },
-    {
-        id: 1,
-        titulo: "Interclasse de Vôlei",
-        resumo: "As finais acontecem nesta sexta-feira.",
-        imagem: "img/volei_webp.webp",
-        categoria: "Esportes",
-        conteudo: "A torcida estava animada e o time do 3º ano levou a melhor..."
-    },
+
     {
         id: 2,
         titulo: "Entrevista com a Merendeira",

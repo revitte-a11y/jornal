@@ -8,14 +8,7 @@ const noticias = [
         categoria: "Avisos",
         conteudo: "Este é o texto completo da nossa primeira matéria! Estamos muito felizes em lançar este portal para a escola." // <--- ADICIONE O CONTEÚDO
     },
-    {
-        id: 1, // <--- ADICIONE O ID AQUI
-        titulo: "Interclasse de Vôlei",
-        resumo: "As finais acontecem nesta sexta-feira no ginásio principal. Venha torcer pela sua sala!",
-        imagem: "img/volei_webp.webp",
-        categoria: "Esportes",
-        conteudo: "A final do interclasse promete parar a escola! Os times do 9º ano A e do 1º ano Médio se enfrentam às 10h no ginásio principal. Não perca a chance de apoiar sua turma!"
-    },
+
     {
         id: 2, // <--- ADICIONE O ID AQUI
         titulo: "Entrevista com a Merendeira",
