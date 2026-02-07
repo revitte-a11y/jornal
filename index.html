@@ -62,20 +62,22 @@
                 <p>Viu algo interessante na escola ou quer denunciar um problema? Envie para nossa redação!</p>
             </div>
             <div class="col-md-6">
-                <form id="formSugestao" class="p-4 bg-light text-dark rounded shadow">
-                    <div class="mb-3">
-                        <label class="form-label">Seu Nome</label>
-                        <input type="text" id="nome" class="form-control" placeholder="Ex: Maria Silva" required>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label">Sua Sugestão</label>
-                        <textarea id="sugestao" class="form-control" rows="3" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary w-100">Enviar para os Editores</button>
-                </form>
-                <div id="mensagemSucesso" class="alert alert-success mt-3 d-none">
-                    Obrigado! Sua sugestão foi enviada com sucesso.
-                </div>
+<form action="https://formspree.io/f/SEU_ID_AQUI" method="POST" id="formSugestao" class="p-4 bg-light text-dark rounded shadow">
+    <div class="mb-3">
+        <label class="form-label">Seu Nome</label>
+        <input type="text" name="nome" id="nome" class="form-control" placeholder="Ex: Maria Silva" required>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Sua Sugestão</label>
+        <textarea name="mensagem" id="sugestao" class="form-control" rows="3" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary w-100">Enviar para os Editores</button>
+</form>
+
+<div id="mensagemSucesso" class="alert alert-success mt-3 d-none">
+    Obrigado! Sua sugestão foi enviada diretamente para nossa redação.
+</div>
+
             </div>
         </div>
     </div>

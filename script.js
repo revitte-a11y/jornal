@@ -92,3 +92,29 @@ window.onload = () => {
         htmlElement.setAttribute('data-bs-theme', 'dark');
     }
 };
+
+const form = document.getElementById('formSugestao');
+
+form.addEventListener('submit', async function(event) {
+    event.preventDefault(); // Impede o redirecionamento da página
+
+    const data = new FormData(event.target);
+    const feedback = document.getElementById('mensagemSucesso');
+
+    // Envia os dados para o Formspree
+    const response = await fetch(event.target.action, {
+        method: 'POST',
+        body: data,
+        headers: {
+            'Accept': 'application/json'
+        }
+    });
+
+    if (response.ok) {
+        form.reset(); // Limpa os campos
+        form.classList.add('d-none'); // Esconde o formulário
+        feedback.classList.remove('d-none'); // Mostra a mensagem de sucesso
+    } else {
+        alert("Ops! Houve um erro ao enviar. Tente novamente mais tarde.");
+    }
+});
