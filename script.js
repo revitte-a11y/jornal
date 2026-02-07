@@ -12,7 +12,7 @@ const noticias = [
     imagem: "https://images.unsplash.com/photo-1504711432869-efd597cdd04d?w=800", // Imagem de jornalismo/comunicação
     categoria: "Avisos"
 },
-    
+
     {
         titulo: "Reforma na Biblioteca",
         resumo: "O espaço agora conta com novos computadores e áreas de estudo em grupo.",
@@ -91,5 +91,4 @@ window.onload = () => {
         toggle.checked = true;
         htmlElement.setAttribute('data-bs-theme', 'dark');
     }
-
 };
