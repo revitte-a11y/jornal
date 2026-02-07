@@ -9,7 +9,7 @@ const noticias = [
     {
         titulo: "Interclasse de Vôlei",
         resumo: "As finais acontecem nesta sexta-feira no ginásio principal. Venha torcer pela sua sala!",
-        imagem: "https://images.unsplash.com/photo-1547347298-407458488a82?w=400",
+        imagem: "img/volei_webp.webp",
         categoria: "Esportes"
     },
     {
